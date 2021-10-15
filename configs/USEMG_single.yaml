@@ -1,0 +1,36 @@
+#############################################################
+# 1. Model Define Configs
+# modality: EMG/US/Fusion/KD
+#############################################################
+ModelConfig:
+  model_name: "EUNet"
+  modality: "US"
+  model_arch: 
+    EUNet: "./configs/EUNet.yaml"
+    MSCNN: "./configs/MSCNN.yaml"
+    XceptionTime: "./configs/XceptionTime.yaml"
+    MKCNN: "./configs/MKCNN.yaml"
+    
+
+#############################################################
+# 2. Optimizer & Train Configs
+#############################################################
+OptimizerConfig:
+  epoches: 100
+  lr: 0.001
+  loss: 'CrossEntropyLoss'
+  use_unbalance_weight: False
+
+#############################################################
+# 3. DataSet Config
+#############################################################  
+DatasetConfig:
+  batch_size: 32  
+  num_workers: 8
+
+#############################################################
+# 4. Output Config
+#############################################################  
+OutputConfig:
+  dir_weights: './outputs/weights/'
+  dir_results: './outputs/results/'

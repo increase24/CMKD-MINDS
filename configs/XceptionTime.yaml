@@ -1,0 +1,24 @@
+EMG:
+  model_name: 'XceptionTime'
+  in_channels: 4
+  n_filter1_block1: 16
+  n_filter2_block1: 32
+  n_filter1_block2: 64
+  n_filter2_block2: 128
+  ks_base: 10
+  adaptivePoolSize: 50
+  lc1: 256
+  lc2: 128
+  num_classes: 20
+US:
+  model_name: 'XceptionTime'
+  in_channels: 4
+  n_filter1_block1: 16
+  n_filter2_block1: 32
+  n_filter1_block2: 64
+  n_filter2_block2: 128
+  ks_base: 10
+  adaptivePoolSize: 200
+  lc1: 256
+  lc2: 128
+  num_classes: 20

@@ -1,0 +1,82 @@
+EMG:
+  model_name: 'MKCNN'
+  Block:
+    in_channels: 1
+    num_stream: 5
+    num_filters1: 32
+    num_filters2: 64
+    stream1:
+      conv_ksize1: 11
+      maxpool_ksize1: 16
+      conv_ksize2: 3
+      maxpool_ksize2: 2
+    stream2:
+      conv_ksize1: 21
+      maxpool_ksize1: 16
+      conv_ksize2: 3
+      maxpool_ksize2: 2
+    stream3:
+      conv_ksize1: 31
+      maxpool_ksize1: 16
+      conv_ksize2: 3
+      maxpool_ksize2: 2
+    stream4:
+      conv_ksize1: 41
+      maxpool_ksize1: 16
+      conv_ksize2: 3
+      maxpool_ksize2: 2
+    stream5:
+      conv_ksize1: 51
+      maxpool_ksize1: 16
+      conv_ksize2: 3
+      maxpool_ksize2: 2
+    dropout_rate: 0.5
+  num_filters_reduce: 128
+  maxpool_ksize1_part3: 2
+  maxpool_ksize2_part3: 2
+  featDim_concat: 768
+  fc1: 512
+  fc2: 128
+  dropout_rate: 0.5
+  num_classes: 20
+US:
+  model_name: 'MKCNN'
+  Block:
+    in_channels: 1
+    num_stream: 5
+    num_filters1: 32
+    num_filters2: 64
+    stream1:
+      conv_ksize1: 11
+      maxpool_ksize1: 16
+      conv_ksize2: 3
+      maxpool_ksize2: 2
+    stream2:
+      conv_ksize1: 21
+      maxpool_ksize1: 16
+      conv_ksize2: 3
+      maxpool_ksize2: 2
+    stream3:
+      conv_ksize1: 31
+      maxpool_ksize1: 16
+      conv_ksize2: 3
+      maxpool_ksize2: 2
+    stream4:
+      conv_ksize1: 41
+      maxpool_ksize1: 16
+      conv_ksize2: 3
+      maxpool_ksize2: 2
+    stream5:
+      conv_ksize1: 51
+      maxpool_ksize1: 16
+      conv_ksize2: 3
+      maxpool_ksize2: 2
+    dropout_rate: 0.5
+  num_filters_reduce: 128
+  maxpool_ksize1_part3: 2
+  maxpool_ksize2_part3: 2
+  featDim_concat: 3072
+  fc1: 512
+  fc2: 128
+  dropout_rate: 0.5
+  num_classes: 20
