@@ -4,7 +4,7 @@ __pycache__
 # outputs: logs, trained models
 outputs/
 # dataset
-data/
+data
 *.tar
 # output files
 *.out
