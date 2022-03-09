@@ -1,1 +1,0 @@
-python ./tools/train.py --config "./configs/USEMG_single.yaml" --modelName "MSCNN" --modality "US"

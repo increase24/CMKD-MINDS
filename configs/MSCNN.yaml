@@ -11,16 +11,3 @@ EMG:
   fc3: 64
   dropout_rate: 0.5
   num_classes: 20
-US:
-  model_name: 'MSCNN'
-  num_stream: 4
-  filter1: 64
-  filter2: 64
-  filter3: 64
-  filter4: 64
-  featDim_concat: 5376
-  fc1: 512
-  fc2: 512
-  fc3: 128
-  dropout_rate: 0.5 
-  num_classes: 20

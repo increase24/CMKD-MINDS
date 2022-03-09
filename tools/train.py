@@ -96,7 +96,7 @@ def main():
                         ModelConfig.model_name+f'_{ModelConfig.modality}_s{idx_subject}_cv{cross_val}'+'.pth.tar')
                 #scheduler.step()
             results[idx_subject,cross_val] = trainer.bst_acc
-            save_result(results, os.path.join(OutputConfig.dir_results, ModelConfig.model_name), ModelConfig.model_name+ f'_{ModelConfig.modality}.txt')
+            save_result(results, os.path.join(OutputConfig.dir_results, ModelConfig.model_name), ModelConfig.model_name+ f'_{ModelConfig.modality}_r1.txt')
     #print('acc s/cv:\n', results)
     print('acc-avg-s:\n', np.mean(results, 1))
     print('acc-avg-total:\n', np.mean(np.mean(results, 1)))

@@ -2,17 +2,16 @@
 ![Python 3.7](https://img.shields.io/badge/python-3.7-green.svg?style=plastic)
 ![PyTorch](https://img.shields.io/badge/PyTorch%20-%23EE4C2C.svg?style=plastic)
 
-This is an official pytorch implementation of [Learning an Augmented sEMG Representation via Cross-modality Knowledge Distillation (under review)]()
+This is an official pytorch implementation of [Cross Modality Knowledge Distillation between A-mode ultrasound and surface electromyography (under review)]()
 
 * Reproduced neural networks for comparison:
   * [x] [Multi Stream CNN(WeiNet)](https://www.sciencedirect.com/science/article/abs/pii/S0167865517304439)
   * [x] [EUNet](https://github.com/increase24/EUNet)
   * [x] [XceptionTime](https://arxiv.org/abs/1911.03803)
   * [x] [Multi-scale Kernel CNN(MKCNN)](https://ieeexplore.ieee.org/document/9495836)
-  * [ ] ResEUNet
 
 ## Environment
-The code is developed using python 3.7 on Ubuntu 20.04. NVIDIA GPU is needed.
+The code is developed using python 3.7 on Ubuntu 18.04. NVIDIA GPU is needed.
 
 
 ## Data preparing

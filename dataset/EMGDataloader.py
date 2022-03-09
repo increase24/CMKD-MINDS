@@ -21,27 +21,33 @@ def get_dataloader(data_path, group_test, DataConfig):
         data_org[i,:,:,:] = df_emgData.iloc[100*i:100*i+256,:].values.transpose().reshape([1,1,4,256])
     #exact 4800 valid samples from raw 10000 samples
     indexs_list=[]
+    start_point = 10
+    end_point = 40
     for i in range(8): # 8 trial
         for j in range(20): # 20 motions
-            indexs = [i for i in range(i*1250+j*50+10,i*1250+j*50+40)]
+            #indexs = [i for i in range(i*1250+j*50+10,i*1250+j*50+40)] # select 3s from the middle
+            indexs = [i for i in range(i*1250+j*50+start_point,i*1250+j*50+end_point)]
             indexs_list=indexs_list+indexs
     data_org=data_org[indexs_list,:,:,:]
     data_org = data_org.astype('float32')
     labels = np.linspace(0,19,20, endpoint=True, dtype=int)
-    labels = np.tile(labels, (30,1))
+    labels = np.tile(labels, (end_point-start_point,1))
     labels= labels.reshape(-1,1,order = 'F')
     labels = np.tile(labels, (8,1))
     #split train and test dataset (4-fold)
+    # 8 repetitions * 20 motion * 30 samples = 4800
+    n_sample = 8 * 20 * (end_point - start_point)
+    n_sample_test = n_sample // 4
     group_train=[0,1,2,3]
     group_train.remove(group_test)
-    data_train = data_org[np.r_[group_train[0]*1200:(group_train[0]+1)*1200,
-                                    group_train[1]*1200:(group_train[1]+1)*1200,
-                                    group_train[2]*1200:(group_train[2]+1)*1200],:,:,:]
-    data_test = data_org[group_test*1200:(group_test+1)*1200,:,:,:]
-    label_train = labels[np.r_[group_train[0]*1200:(group_train[0]+1)*1200,
-                                        group_train[1]*1200:(group_train[1]+1)*1200,
-                                        group_train[2]*1200:(group_train[2]+1)*1200],:]
-    label_test = labels[group_test*1200:(group_test+1)*1200,:]
+    data_train = data_org[np.r_[group_train[0]*n_sample_test:(group_train[0]+1)*n_sample_test,
+                                    group_train[1]*n_sample_test:(group_train[1]+1)*n_sample_test,
+                                    group_train[2]*n_sample_test:(group_train[2]+1)*n_sample_test],:,:,:]
+    data_test = data_org[group_test*n_sample_test:(group_test+1)*n_sample_test,:,:,:]
+    label_train = labels[np.r_[group_train[0]*n_sample_test:(group_train[0]+1)*n_sample_test,
+                                        group_train[1]*n_sample_test:(group_train[1]+1)*n_sample_test,
+                                        group_train[2]*n_sample_test:(group_train[2]+1)*n_sample_test],:]
+    label_test = labels[group_test*n_sample_test:(group_test+1)*n_sample_test,:]
     train_data = EMGDataset(data_train, label_train)
     valid_data = EMGDataset(data_test, label_test)
     train_loader = DataLoader(train_data, batch_size = DataConfig.batch_size, shuffle = True, num_workers = DataConfig.num_workers, 
