@@ -62,6 +62,11 @@ def main():
         model = get_network(ModelConfig.model_name, cfg_model)
         model.apply(weight_init)
         model.to(device)
+        # load checkpoint
+        OutputConfig = cfg.OutputConfig
+        checkpoint = torch.load(os.path.join(OutputConfig.dir_weights, ModelConfig.model_name, 
+                f'{ModelConfig.model_name}_{ModelConfig.modality}_s{idx_subject}_cv{cross_val}.pth.tar'))
+        model.load_state_dict(checkpoint['state_dict'])
         # define criterion, optimizer, scheduler
         OptimizerConfig = cfg.OptimizerConfig
         criterion = nn.CrossEntropyLoss().to(device)
@@ -70,29 +75,8 @@ def main():
         # start training
         num_epoches = int(OptimizerConfig.epoches)
         trainer = Trainer(train_loader, valid_loader, model, device, criterion, optimizer, print_freq=100)
-        print(" > Training is getting started...")
-        print(" > Training takes {} epochs.".format(num_epoches))
-        # trainer.reset_optimiser(optimizer)
-        for epoch in range(num_epoches):
-            # train one epoch
-            epoch_start_time = time.time()
-            train_loss, train_acc = trainer.train_epoch(epoch) 
-            valid_loss, valid_acc = trainer.validate(eval_only=False)
-            epoch_end_time = time.time()
-            print("epoch cost time: %.4f min" %((epoch_end_time - epoch_start_time)/60))
-            #scheduler.step()
-            print(f'current best accuracy: {trainer.bst_acc}')
-            # remember best acc and save checkpoint
-            if(trainer.flag_improve):
-                print(f'the best accuracy increases to {trainer.bst_acc}')
-                save_checkpoint({
-                    'epoch': epoch,
-                    'arch': ModelConfig['model_name'],
-                    'state_dict': trainer.model.state_dict(),
-                    'best_acc': trainer.bst_acc}, 
-                    os.path.join(OutputConfig.dir_weights, ModelConfig.model_name),
-                    ModelConfig.model_name+f'_{ModelConfig.modality}_s{idx_subject}_cv{cross_val}'+'.pth.tar')
-            #scheduler.step()
+        print(" > Validation is getting started...")
+        valid_loss, valid_acc = trainer.validate(eval_only=False)
         results[idx_subject,cross_val] = trainer.bst_acc
         save_result(results, os.path.join(OutputConfig.dir_results, ModelConfig.model_name), ModelConfig.model_name+ f'_{ModelConfig.modality}.txt')
     #print('acc s/cv:\n', results)

@@ -2,7 +2,7 @@
 ![Python 3.7](https://img.shields.io/badge/python-3.7-green.svg?style=plastic)
 ![PyTorch](https://img.shields.io/badge/PyTorch%20-%23EE4C2C.svg?style=plastic)
 
-This is an official pytorch implementation of [Cross Modality Knowledge Distillation between A-mode ultrasound and surface electromyography (under review)]()
+This is an official pytorch implementation of [Cross Modality Knowledge Distillation between A-mode ultrasound and surface electromyography](https://ieeexplore.ieee.org/document/9845471/)
 
 * Reproduced neural networks for comparison:
   * [x] [Multi Stream CNN(WeiNet)](https://www.sciencedirect.com/science/article/abs/pii/S0167865517304439)
@@ -41,24 +41,38 @@ ${ROOT}/data
    pip install -r requirements.txt
    ```
 ### Training
-For training a network on single sEMG or AUS modality, run the script files `train_emg/us_***.sh` in the directory `./scripts/`. For instance:
+For training a network on single sEMG or AUS modality, run the script **tools/train.py** with configuration of model and modality. For instance:
 ```
 # train network XceptionTime on sEMG modality
-sh scripts/train_emg_XceptionTime.sh
+python ./tools/train.py --config "./configs/USEMG_single.yaml" --modelName "XceptionTime" --modality "EMG"
 
 # train network EUNet on US modality
-sh scripts/train_us_EUNet.sh
+python ./tools/train.py --config "./configs/USEMG_single.yaml" --modelName "EUNet" --modality "US"
 ```
 ### Evaluation
-  ```
-  
-  ```
+For validating a network on single sEMG or AUS modality, run the script **tools/test.py** with configuration of model and modality. For instance:
+```
+# test network XceptionTime on sEMG modality
+python ./tools/test.py --config "./configs/USEMG_single.yaml" --modelName "XceptionTime" --modality "EMG"
+
+# test network EUNet on US modality
+python ./tools/test.py --config "./configs/USEMG_single.yaml" --modelName "EUNet" --modality "US"
+```
 
 ## Results
 
 ## Citation
 If you find this repository useful for your research, please cite with:
 ```
+@ARTICLE{Zeng2022Cross,
+  author={Zeng, Jia and Sheng, Yixuan and Yang, Yicheng and Zhou, Ziliang and Liu, Honghai},
+  journal={IEEE Transactions on Instrumentation and Measurement}, 
+  title={Cross Modality Knowledge Distillation Between A-Mode Ultrasound and Surface Electromyography}, 
+  year={2022},
+  volume={71},
+  number={},
+  pages={1-9},
+  doi={10.1109/TIM.2022.3195264}}
 ```
 
 ## Contact
