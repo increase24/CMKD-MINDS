@@ -49,6 +49,8 @@ def main():
         results = np.loadtxt(os.path.join(OutputConfig.dir_results, ModelConfig.model_name, ModelConfig.model_name+ f'_{ModelConfig.modality}.txt'))
     # idx_subject = 0
     for idx_subject in range(len(paths_data)):
+        if idx_subject > 0:
+            break
         for cross_val in range(4): # 4-fold
             print(f"subject: {idx_subject}, cv: {cross_val}")
             # load dataloader
@@ -94,7 +96,7 @@ def main():
                         os.path.join(OutputConfig.dir_weights, ModelConfig.model_name),
                         ModelConfig.model_name+f'_{ModelConfig.modality}_s{idx_subject}_cv{cross_val}'+'.pth.tar')
             #scheduler.step()
-        results[idx_subject,cross_val] = trainer.bst_acc
+            results[idx_subject,cross_val] = trainer.bst_acc
         save_result(results, os.path.join(OutputConfig.dir_results, ModelConfig.model_name), ModelConfig.model_name+ f'_{ModelConfig.modality}.txt')
     #print('acc s/cv:\n', results)
     print('acc-avg-s:\n', np.mean(results, 1))

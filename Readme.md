@@ -71,7 +71,7 @@ python ./tools/test.py --config "./configs/USEMG_single.yaml" --modelName "EUNet
 | MKCNN | 82.69 ± 4.94 | 84.59 ± 5.36 | 0 (0.0078)|
 | XceptionTime  | 88.30 ± 4.60 | 89.06 ± 4.82 | 0 (0.0234)|
 | MINDS (ours)  | 89.05 ± 4.71  | 90.06 ± 4.52 | 0 (0.0078)|
->**The accuracies comparison of sEMG modality with knowledge distillation ("sEMG(KD)") and without knowledge distillation ("sEMG"). The Wilcoxon signed rank test is applied to verify the significance of the improvement obtained by knowledge distillation. The null hypothesis is rejected when $H_0 = 0$ ($p< 0.05$).**
+>**The accuracies comparison of sEMG modality with knowledge distillation ("sEMG(w. KD)") and without knowledge distillation ("sEMG(w.o. KD)"). The Wilcoxon signed rank test is applied to verify the significance of the improvement obtained by knowledge distillation. The null hypothesis is rejected when $H_0 = 0$ ($p< 0.05$).**
 
 
 ## Citation
