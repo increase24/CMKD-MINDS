@@ -1,0 +1,22 @@
+EMG:
+  model_name: 'MINDS'
+  in_channels: 1
+  n_filters: [16, 64, 256]
+  strides: [1, 1, 1]
+  shortcuts: [False, True, True]
+  ks_base: 15
+  adaptivePoolSize: 50
+  lc1: 256
+  lc2: 128
+  num_classes: 20
+US:
+  model_name: 'MINDS'
+  in_channels: 1
+  n_filters: [16, 64, 256]
+  strides: [16, 2, 1]
+  shortcuts: [False, True, True]
+  ks_base: 15
+  adaptivePoolSize: 32
+  lc1: 256
+  lc2: 128
+  num_classes: 20

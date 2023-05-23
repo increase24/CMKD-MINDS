@@ -10,6 +10,7 @@ ModelConfig:
     MSCNN: "./configs/MSCNN.yaml"
     XceptionTime: "./configs/XceptionTime.yaml"
     MKCNN: "./configs/MKCNN.yaml"
+    MINDS: "./configs/MINDS.yaml"
     
 
 #############################################################
