@@ -59,6 +59,16 @@ python ./tools/test.py --config "./configs/USEMG_single.yaml" --modelName "MINDS
 python ./tools/test.py --config "./configs/USEMG_single.yaml" --modelName "EUNet" --modality "US"
 ```
 
+### Knowlwedge distillation
+We take MKCNN(US)-distill-MKCNN(EMG) as an example.
+```
+# Firstly train MKCNN network on US modality to obtain the teacher network weights
+python ./tools/train.py --config "./configs/USEMG_single.yaml" --modelName "MKCNN" --modality "US"
+
+# Secondly apply MKCNN(US) as a teacher, to guide the training of student network MKCNN(EMG)
+python ./tools/train_cmkd.py --config configs/USEMG_cmkd.yaml --model_us MKCNN --model_emg MKCNN --alpha 0.8 --T 20
+```
+
 ## Results
 | ![result](figs/results_EMG_AUS.png) | 
 |:--:| 
@@ -85,6 +95,15 @@ If you find this repository useful for your research, please cite with:
   pages={1--9},
   year={2022},
   publisher={IEEE}
+},
+
+@inproceedings{zeng2020feature,
+  title={Feature fusion of sEMG and ultrasound signals in hand gesture recognition},
+  author={Zeng, Jia and Zhou, Yu and Yang, Yicheng and Wang, Jiaole and Liu, Honghai},
+  booktitle={2020 IEEE International Conference on Systems, Man, and Cybernetics (SMC)},
+  pages={3911--3916},
+  year={2020},
+  organization={IEEE}
 }
 ```
 
